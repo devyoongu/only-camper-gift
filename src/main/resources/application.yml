@@ -22,10 +22,11 @@ spring:
     schemas: gift
     url: jdbc:mysql://localhost:13306/gift?serverTimezone=UTC&characterEncoding=UTF-8
     enabled: true
+  config:
+    import: aws.yml
 
 logging:
   config: classpath:logback-local.xml
 
 example.order:
   base-url: http://localhost:8080/
-

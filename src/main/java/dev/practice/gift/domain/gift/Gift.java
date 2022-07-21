@@ -91,7 +91,8 @@ public class Gift extends AbstractEntity {
         this.giftToken = TokenGenerator.randomCharacterWithPrefix(GIFT_PREFIX);
         this.buyerUserId = buyerUserId;
         this.orderToken = orderToken;
-        this.status = Status.INIT;
+//        this.status = Status.INIT; // order에서 선물시 바로 결제중 상태로 생성
+        this.status = Status.IN_PAYMENT;
         this.pushType = pushType;
         this.giftReceiverName = giftReceiverName;
         this.giftReceiverPhone = giftReceiverPhone;
