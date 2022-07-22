@@ -1,10 +1,14 @@
 package dev.practice.gift.domain.gift;
 
 import dev.practice.gift.domain.gift.order.OrderApiCaller;
+import dev.practice.gift.infrastructure.gift.GiftRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -14,6 +18,7 @@ public class GiftServiceImpl implements GiftService {
     private final GiftStore giftStore;
     private final OrderApiCaller orderApiCaller;
     private final GiftToOrderMapper giftToOrderMapper;
+    private final GiftRepository giftRepository;
 
     /**
      * 선물 주문 정보를 가져온다
@@ -28,6 +33,15 @@ public class GiftServiceImpl implements GiftService {
         return new GiftInfo(gift);
     }
 
+    @Override
+    public List<GiftInfo> getGiftInfoList(Long giftReceiverUserId) {
+        List<Gift> byGiftReceiverUserId = giftRepository.findByGiftReceiverUserId(giftReceiverUserId);
+
+        List<GiftInfo> giftInfoList = byGiftReceiverUserId.stream().map(gift -> new GiftInfo(gift)).collect(Collectors.toList());
+
+        return giftInfoList;
+    }
+
     /**
      * 선물하기 주문을 등록한다
      * 해당 주문을 주문 서비스에 등록하기 위해 API 를 호출하고
@@ -38,10 +52,10 @@ public class GiftServiceImpl implements GiftService {
      */
     @Override
     @Transactional
-    public GiftInfo registerOrder(GiftCommand.Register request) {
-        var orderCommand = giftToOrderMapper.of(request);
+    public GiftInfo registerOrder(GiftCommand.Register giftCommand) {
+        var orderCommand = giftToOrderMapper.of(giftCommand);
         var orderToken = orderApiCaller.registerGiftOrder(orderCommand);
-        var initGift = request.toEntity(orderToken);
+        var initGift = giftCommand.toEntity(orderToken);
         var gift = giftStore.store(initGift);
         return new GiftInfo(gift);
     }

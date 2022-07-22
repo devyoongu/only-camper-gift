@@ -24,6 +24,7 @@ public class GiftReaderImpl implements GiftReader {
     @Override
     public Gift getGiftByOrderToken(String orderToken) {
         if (StringUtils.isEmpty(orderToken)) throw new InvalidParamException();
-        return giftRepository.findByOrderToken(orderToken).orElseThrow(EntityNotFoundException::new);
+//        return giftRepository.findByOrderToken(orderToken).orElseThrow(EntityNotFoundException::new);
+        return giftRepository.findByOrderToken(orderToken).orElse(new Gift());//대기큐 해소용 임시
     }
 }

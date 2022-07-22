@@ -12,13 +12,15 @@ public class GiftInfo {
     private final String giftReceiverName;
     private final String giftReceiverPhone;
     private final String giftMessage;
+    private final String status;
 
     public GiftInfo(Gift gift) {
         this.orderToken = gift.getOrderToken();
         this.giftToken = gift.getGiftToken();
         this.pushType = gift.getPushType();
         this.giftReceiverName = gift.getGiftReceiverName();
-        this.giftReceiverPhone = gift.getGiftReceiverName();
+        this.giftReceiverPhone = gift.getReceiverPhone();
         this.giftMessage = gift.getGiftMessage();
+        this.status = gift.getStatus().getDescription();
     }
 }

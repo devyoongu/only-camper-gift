@@ -1,10 +1,13 @@
 package dev.practice.gift.domain.gift;
 
+import java.util.List;
+
 public interface GiftService {
 
     GiftInfo getGiftInfo(String giftToken);
+    List<GiftInfo> getGiftInfoList(Long giftReceiverUserId);
 
-    GiftInfo registerOrder(GiftCommand.Register request);
+    GiftInfo registerOrder(GiftCommand.Register giftCommand);
 
     void requestPaymentProcessing(String giftToken);
 

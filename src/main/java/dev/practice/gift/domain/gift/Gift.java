@@ -25,6 +25,7 @@ public class Gift extends AbstractEntity {
     private Long id;
     private String giftToken;
     private Long buyerUserId;
+    private Long giftReceiverUserId;
     private String orderToken;
 
     @Enumerated(EnumType.STRING)
@@ -52,7 +53,7 @@ public class Gift extends AbstractEntity {
     @AllArgsConstructor
     public enum Status {
         INIT("선물 주문 생성"),
-        IN_PAYMENT("결제 중"),
+        IN_PAYMENT("주문자 결제 중"),
         ORDER_COMPLETE("주문 완료"),
         PUSH_COMPLETE("선물 링크 발송 완료"),
         ACCEPT("선물 수락"),
@@ -76,6 +77,7 @@ public class Gift extends AbstractEntity {
     @Builder
     public Gift(
             Long buyerUserId,
+            Long giftReceiverUserId,
             String orderToken,
             PushType pushType,
             String giftReceiverName,
@@ -90,6 +92,7 @@ public class Gift extends AbstractEntity {
 
         this.giftToken = TokenGenerator.randomCharacterWithPrefix(GIFT_PREFIX);
         this.buyerUserId = buyerUserId;
+        this.giftReceiverUserId = giftReceiverUserId;
         this.orderToken = orderToken;
 //        this.status = Status.INIT; // order에서 선물시 바로 결제중 상태로 생성
         this.status = Status.IN_PAYMENT;

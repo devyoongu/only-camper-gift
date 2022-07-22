@@ -18,6 +18,9 @@ public class GiftDto {
         @NotNull(message = "userId 는 필수값입니다")
         private Long buyerUserId;
 
+        @NotNull(message = "giftReceiverUserId 는 필수값입니다!")
+        private Long giftReceiverUserId;
+
         @NotBlank(message = "payMethod 는 필수값입니다")
         private String payMethod;
 

@@ -17,9 +17,9 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 #resources/application-oauth.properties
-application-real-oauth.properties
 application-oauth.properties
 aws.yml
+application-real-db.properties
 
 ### IntelliJ IDEA ###
 .idea

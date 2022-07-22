@@ -18,8 +18,8 @@ public class GiftFacade {
         return giftService.getGiftInfo(giftToken);
     }
 
-    public GiftInfo registerOrder(GiftCommand.Register command) {
-        var giftInfo = giftService.registerOrder(command);
+    public GiftInfo registerOrder(GiftCommand.Register giftCommand) {
+        var giftInfo = giftService.registerOrder(giftCommand);
         log.info("registerOrder orderToken = {}", giftInfo);
         return giftInfo;
     }

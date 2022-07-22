@@ -29,7 +29,7 @@ dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
     implementation 'org.apache.commons:commons-lang3:3.9'
 
-    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-core:7.10.0'//db 초기 생성
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor(
             'org.projectlombok:lombok',
@@ -49,6 +49,8 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 }
 
 test {
