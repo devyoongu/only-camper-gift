@@ -43,3 +43,4 @@ out/
 
 src/main/resources/static/images/represent/
 #src/main/resources/application.yml
+/logging.config.path_IS_UNDEFINED/
