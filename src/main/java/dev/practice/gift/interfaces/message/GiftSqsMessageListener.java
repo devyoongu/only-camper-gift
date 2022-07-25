@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class GiftSqsMessageListener {
     private final GiftFacade giftFacade;
 
-    @SqsListener(value = "gift.fifo", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
+    @SqsListener(value = "gift.fifo", deletionPolicy = SqsMessageDeletionPolicy.ALWAYS)
     public void readMessage(GiftPaymentCompleteMessage message) {
         var orderToken = message.getOrderToken();
         log.info("[GiftSqsMessageListener.readMessage] orderToken = {}", orderToken);

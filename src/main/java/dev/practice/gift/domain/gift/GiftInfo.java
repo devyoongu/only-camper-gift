@@ -12,7 +12,8 @@ public class GiftInfo {
     private final String giftReceiverName;
     private final String giftReceiverPhone;
     private final String giftMessage;
-    private final String status;
+    private final String statusDesc;
+    private final String statusName;
 
     public GiftInfo(Gift gift) {
         this.orderToken = gift.getOrderToken();
@@ -21,6 +22,7 @@ public class GiftInfo {
         this.giftReceiverName = gift.getGiftReceiverName();
         this.giftReceiverPhone = gift.getReceiverPhone();
         this.giftMessage = gift.getGiftMessage();
-        this.status = gift.getStatus().getDescription();
+        this.statusDesc = gift.getStatus().getDescription();
+        this.statusName = gift.getStatus().name();
     }
 }

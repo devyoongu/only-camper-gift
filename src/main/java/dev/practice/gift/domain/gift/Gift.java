@@ -56,7 +56,7 @@ public class Gift extends AbstractEntity {
         IN_PAYMENT("주문자 결제 중"),
         ORDER_COMPLETE("주문 완료"),
         PUSH_COMPLETE("선물 링크 발송 완료"),
-        ACCEPT("선물 수락"),
+        ACCEPT("수락 완료"),
         DELIVERY_PREPARE("상품준비"),
         IN_DELIVERY("배송중"),
         DELIVERY_COMPLETE("배송완료"),
@@ -88,7 +88,7 @@ public class Gift extends AbstractEntity {
         if (pushType == null) throw new InvalidParamException("Gift constructor pushType is null");
         if (StringUtils.isEmpty(giftReceiverName)) throw new InvalidParamException("Gift constructor giftReceiverName is empty");
         if (StringUtils.isEmpty(giftReceiverPhone)) throw new InvalidParamException("Gift constructor giftReceiverPhone is empty");
-        if (StringUtils.isEmpty(giftMessage)) throw new InvalidParamException("Gift constructor giftMessage is empty");
+//        if (StringUtils.isEmpty(giftMessage)) throw new InvalidParamException("Gift constructor giftMessage is empty");//필수값 제외
 
         this.giftToken = TokenGenerator.randomCharacterWithPrefix(GIFT_PREFIX);
         this.buyerUserId = buyerUserId;
@@ -129,12 +129,12 @@ public class Gift extends AbstractEntity {
         var etcMessage = request.getEtcMessage();
 
         if (!availableAccept()) throw new IllegalStatusException();
-        if (StringUtils.isEmpty(receiverName)) throw new InvalidParamException("Gift accept receiverName is empty");
-        if (StringUtils.isEmpty(receiverPhone)) throw new InvalidParamException("Gift accept receiverPhone is empty");
-        if (StringUtils.isEmpty(receiverZipcode)) throw new InvalidParamException("Gift accept receiverZipcode is empty");
-        if (StringUtils.isEmpty(receiverAddress1)) throw new InvalidParamException("Gift accept receiverAddress1 is empty");
-        if (StringUtils.isEmpty(receiverAddress2)) throw new InvalidParamException("Gift accept receiverAddress2 is empty");
-        if (StringUtils.isEmpty(etcMessage)) throw new InvalidParamException("Gift accept etcMessage is empty");
+//        if (StringUtils.isEmpty(receiverName)) throw new InvalidParamException("Gift accept receiverName is empty");
+//        if (StringUtils.isEmpty(receiverPhone)) throw new InvalidParamException("Gift accept receiverPhone is empty");
+//        if (StringUtils.isEmpty(receiverZipcode)) throw new InvalidParamException("Gift accept receiverZipcode is empty");
+//        if (StringUtils.isEmpty(receiverAddress1)) throw new InvalidParamException("Gift accept receiverAddress1 is empty");
+//        if (StringUtils.isEmpty(receiverAddress2)) throw new InvalidParamException("Gift accept receiverAddress2 is empty");
+//        if (StringUtils.isEmpty(etcMessage)) throw new InvalidParamException("Gift accept etcMessage is empty");
 
         this.status = Status.ACCEPT;
         this.receiverName = receiverName;

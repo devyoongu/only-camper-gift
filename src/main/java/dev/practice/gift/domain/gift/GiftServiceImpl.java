@@ -34,10 +34,21 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
-    public List<GiftInfo> getGiftInfoList(Long giftReceiverUserId) {
+    public List<GiftInfo> findByGiftReceiverUserId(Long giftReceiverUserId, String status) {
         List<Gift> byGiftReceiverUserId = giftRepository.findByGiftReceiverUserId(giftReceiverUserId);
 
-        List<GiftInfo> giftInfoList = byGiftReceiverUserId.stream().map(gift -> new GiftInfo(gift)).collect(Collectors.toList());
+        List<GiftInfo> giftInfoList = byGiftReceiverUserId.stream()
+                .filter(gift ->
+                        {
+                            if (status == null) {
+                                return "ORDER_COMPLETE".equals(gift.getStatus().name()) || "ACCEPT".equals(gift.getStatus().name());
+                            } else {
+                                return status.equals(gift.getStatus().name());
+                            }
+                        }
+                )
+                .map(gift -> new GiftInfo(gift))
+                .collect(Collectors.toList());
 
         return giftInfoList;
     }

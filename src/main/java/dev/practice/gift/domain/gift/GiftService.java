@@ -5,7 +5,7 @@ import java.util.List;
 public interface GiftService {
 
     GiftInfo getGiftInfo(String giftToken);
-    List<GiftInfo> getGiftInfoList(Long giftReceiverUserId);
+    List<GiftInfo> findByGiftReceiverUserId(Long giftReceiverUserId,String status);
 
     GiftInfo registerOrder(GiftCommand.Register giftCommand);
 

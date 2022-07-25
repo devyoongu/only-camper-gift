@@ -2,19 +2,16 @@ package dev.practice.gift.interfaces.api;
 
 import dev.practice.gift.application.GiftFacade;
 import dev.practice.gift.common.response.CommonResponse;
-import dev.practice.gift.domain.gift.Gift;
 import dev.practice.gift.domain.gift.GiftInfo;
 import dev.practice.gift.domain.gift.GiftService;
 import dev.practice.gift.infrastructure.gift.GiftRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -23,9 +20,6 @@ import java.util.Optional;
 public class GiftApiController {
     private final GiftFacade giftFacade;
     private final GiftDtoMapper giftDtoMapper;
-
-    private final GiftRepository giftRepository;
-
     private final GiftService giftService;
 
     @GetMapping("/{giftToken}")
@@ -35,12 +29,13 @@ public class GiftApiController {
     }
 
     @GetMapping
-    public CommonResponse giftList(Long giftReceiverUserId) {
-        List<GiftInfo> giftInfoList = giftService.getGiftInfoList(giftReceiverUserId);
+    public CommonResponse findByGiftReceiverUserId(@RequestParam("giftReceiverUserId") Long giftReceiverUserId, @RequestParam(required=false) String status) {
+        List<GiftInfo> giftInfoList = giftService.findByGiftReceiverUserId(giftReceiverUserId,status);
 
         return CommonResponse.success(giftInfoList);
     }
 
+    /**선물하기 등록*/
     @PostMapping
     public CommonResponse registerOrder(@RequestBody @Valid GiftDto.RegisterReq request) {
         var giftCommand = giftDtoMapper.of(request);
@@ -48,16 +43,24 @@ public class GiftApiController {
         return CommonResponse.success(new GiftDto.RegisterRes(giftInfo));
     }
 
+    /**
+     * 선물 결제
+     * - order에서 호출
+     * */
     @PostMapping("/{giftToken}/payment-processing")
     public CommonResponse requestPaymentProcessing(@PathVariable String giftToken) {
         giftFacade.requestPaymentProcessing(giftToken);
         return CommonResponse.success("OK");
     }
 
+    /**
+     * 선물수락
+     * */
     @PostMapping("/{giftToken}/accept-gift")
     public CommonResponse acceptGift(
             @PathVariable String giftToken,
-            @RequestBody @Valid GiftDto.AcceptGiftReq request
+            @RequestBody @Valid GiftDto.AcceptGiftReq request,
+            BindingResult bindingResult
     ) {
         var acceptCommand = giftDtoMapper.of(giftToken, request);
         giftFacade.acceptGift(acceptCommand);

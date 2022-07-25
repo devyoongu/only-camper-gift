@@ -13,6 +13,8 @@ public class OrderApiCommand {
     @ToString
     public static class Register {
         private final Long buyerUserId;
+        private String pushType;
+        private String giftReceiverPhone;
         private final Long giftReceiverUserId;
         private final String giftReceiverName;
         private final String payMethod;
