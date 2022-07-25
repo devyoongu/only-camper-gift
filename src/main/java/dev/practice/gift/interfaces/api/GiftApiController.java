@@ -28,6 +28,9 @@ public class GiftApiController {
         return CommonResponse.success(giftInfo);
     }
 
+    /**
+     * 받은 선물 리스트 조회
+     * */
     @GetMapping
     public CommonResponse findByGiftReceiverUserId(@RequestParam("giftReceiverUserId") Long giftReceiverUserId, @RequestParam(required=false) String status) {
         List<GiftInfo> giftInfoList = giftService.findByGiftReceiverUserId(giftReceiverUserId,status);

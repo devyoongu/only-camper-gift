@@ -9,6 +9,7 @@ public class GiftInfo {
     private final String orderToken;
     private final String giftToken;
     private final Gift.PushType pushType;
+    private Long buyerUserId;
     private final String giftReceiverName;
     private final String giftReceiverPhone;
     private final String giftMessage;
@@ -19,6 +20,7 @@ public class GiftInfo {
         this.orderToken = gift.getOrderToken();
         this.giftToken = gift.getGiftToken();
         this.pushType = gift.getPushType();
+        this.buyerUserId = gift.getBuyerUserId();
         this.giftReceiverName = gift.getGiftReceiverName();
         this.giftReceiverPhone = gift.getReceiverPhone();
         this.giftMessage = gift.getGiftMessage();
