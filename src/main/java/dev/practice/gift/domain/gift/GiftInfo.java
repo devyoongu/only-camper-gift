@@ -3,6 +3,9 @@ package dev.practice.gift.domain.gift;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 @Getter
 @ToString
 public class GiftInfo {
@@ -15,6 +18,7 @@ public class GiftInfo {
     private final String giftMessage;
     private final String statusDesc;
     private final String statusName;
+    private final LocalDateTime paidAt;
 
     public GiftInfo(Gift gift) {
         this.orderToken = gift.getOrderToken();
@@ -26,5 +30,6 @@ public class GiftInfo {
         this.giftMessage = gift.getGiftMessage();
         this.statusDesc = gift.getStatus().getDescription();
         this.statusName = gift.getStatus().name();
+        this.paidAt = gift.getPaidAt();
     }
 }

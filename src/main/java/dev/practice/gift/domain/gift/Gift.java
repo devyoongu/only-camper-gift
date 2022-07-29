@@ -8,6 +8,7 @@ import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 
@@ -44,7 +45,7 @@ public class Gift extends AbstractEntity {
     private String receiverAddress2;
     private String etcMessage;
 
-    private ZonedDateTime paidAt;
+    private LocalDateTime paidAt;
     private ZonedDateTime pushedAt;
     private ZonedDateTime acceptedAt;
     private ZonedDateTime expiredAt;
@@ -111,7 +112,7 @@ public class Gift extends AbstractEntity {
     public void completePayment() {
         if (this.status != Status.IN_PAYMENT) throw new IllegalStatusException("Gift paymentComplete");
         this.status = Status.ORDER_COMPLETE;
-        this.paidAt = ZonedDateTime.now();
+        this.paidAt = LocalDateTime.now();
     }
 
     public void pushLink() {

@@ -35,7 +35,7 @@ public class GiftServiceImpl implements GiftService {
 
     @Override
     public List<GiftInfo> findByGiftReceiverUserId(Long giftReceiverUserId, String status) {
-        List<Gift> byGiftReceiverUserId = giftRepository.findByGiftReceiverUserId(giftReceiverUserId);
+        List<Gift> byGiftReceiverUserId = giftRepository.findByGiftReceiverUserIdOrderByPaidAtDesc(giftReceiverUserId);
 
         List<GiftInfo> giftInfoList = byGiftReceiverUserId.stream()
                 .filter(gift ->
